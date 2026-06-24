@@ -1,8 +1,5 @@
 # Week 3: Dynamic Programming & Model-Free Prediction
 
-This bridges the gap between **Planning** (solving an environment with known dynamics) and **Learning** (predicting value functions when environment dynamics are completely unknown).
-
----
 
 ## 1. The Bellman Equations: Expectation vs. Optimality
 
@@ -19,7 +16,7 @@ A full Model-Based environment is formalized as a Markov Decision Process (MDP) 
 
 ### 1.2 The Bellman Expectation Equation
 
-The Bellman Expectation Equation expresses the value of a state $V^\pi(s)$ under a specific behavioral policy $\pi(a \mid s)$. It represents a linear system of equations across the state space.
+The Expectation equation answers the question: *"If I am stuck acting according to my current, messy policy $\pi$, what is the long-term value of my current state?"* It represents a linear system of equations across the state space.
 
 #### Mathematical Derivation:
 
@@ -32,6 +29,10 @@ By applying the law of total expectation to condition on the action taken and th
 
 $$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \left( R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a V^\pi(s') \right)$$
 
+* **The Outer Sum ($\sum_a \pi(a \mid s)$):** This accounts for your internal policy randomness (e.g., if you choose between actions via a probability distribution).
+* **The Inner Sum ($\sum_{s'} P_{ss'}^a$):** This accounts for the environment's structural transition randomness.
+* **Linearity:** Because there are no operators like $\max$ or $\min$, this is a standard system of linear equations. If you have $N$ states, you can solve this exactly using matrix inversion ($V = (I - \gamma P)^{-1} R$).
+
 Similarly, for the state-action value function $Q^\pi(s, a)$:
 
 
@@ -41,7 +42,7 @@ $$Q^\pi(s, a) = R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \sum_{a' \in A} \pi(a' 
 
 ### 1.3 The Bellman Optimality Equation
 
-The Bellman Optimality Equation characterizes the value function when acting under an *optimal policy* $\pi^{\ast}$. Because the optimal policy must choose the action that maximizes the expected return, this equation is fundamentally non-linear due to the inclusion of the $\max$ operator.
+The Optimality equation answers the question: *"If I discard my current strategy and act flawlessly from this moment onward, what is the maximum possible value of this state?"* Because the optimal policy must choose the action that maximizes the expected return, this equation is fundamentally non-linear due to the inclusion of the $\max$ operator.
 
 #### State Value Function $V^{\ast}(s)$:
 
@@ -52,6 +53,9 @@ $$V^{\ast}(s) = \max_{a \in A} \left( R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a V
 #### Action Value Function $Q^{\ast}(s, a)$:
 
 $$Q^{\ast}(s, a) = R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \max_{a' \in A} Q^{\ast}(s', a')$$
+
+* **The $\max_a$ Operator:** We no longer care about the policy's distribution $\pi(a \mid s)$. We assume the agent will look at all available choices and deliberately pick the single action that yields the highest expected return.
+* **Non-Linearity:** The $\max$ operator makes it impossible to solve using standard linear algebra matrix inversion. We are forced to use iterative optimization methods to let the numbers gradually settle into place.
 
 ---
 
@@ -66,7 +70,7 @@ Iterative Policy Evaluation computes the state-value function $V^\pi$ for an arb
 ```text
 Input: Policy \pi to be evaluated
 Initialize V(s) = 0 for all s in S, and V(terminal) = 0
-Parameter: \theta > 0 (small convergence threshold)
+Parameter: \theta > 0
 
 Loop:
   \Delta \leftarrow 0
@@ -182,7 +186,7 @@ When the environment matrices $P$ and $R$ are unknown, the agent must drop plann
 
 ### 4.1 Monte Carlo (MC) Methods
 
-Monte Carlo methods learn value functions directly from completed episodes of experience. The target value for an update is the actual empirical total return $G_t$.
+Monte Carlo methods learn value functions directly from completed episodes of experience. The target value for an update is the actual empirical total return $G_t$ observed at the end of the episode.
 
 #### Update Equation:
 
