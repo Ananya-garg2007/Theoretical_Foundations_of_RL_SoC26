@@ -130,7 +130,7 @@ Q-learning is a fundamental TD control algorithm that learns the optimal action-
 It is based on the Bellman optimality equation:
 
 $$
-Q^*(s,a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s',a')]
+Q^_(s,a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s',a')]
 $$
 
 Update rule:
@@ -167,13 +167,14 @@ $$
 Q(s,a) = \mathbb{E}[G_t \mid S_t = s, A_t = a]
 $$
 
-These values are stored in a **Q-table**, which acts as the agent’s memory:
+These values are stored in a **Q-table**, which acts as the agent’s memory. The Q-table is essentially a memory structure where the agent stores information about which actions yield the best rewards in each state. It is a table of Q-values representing the agent's understanding of the environment.:
 
 - Rows represent states  
 - Columns represent actions  
 - Each entry stores the Q-value for a state-action pair  
 
 As the agent interacts with the environment, the Q-table is updated and gradually converges to the optimal action-value function.
+
 
 ---
 
