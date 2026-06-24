@@ -127,7 +127,6 @@ Q-learning is a fundamental TD control algorithm that learns the optimal action-
 
 It is based on the Bellman optimality equation:
 
-
 $$
 Q^*(s,a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s',a')]
 $$
@@ -144,6 +143,110 @@ Key ideas:
 - Bootstrapping  
 - Off-policy learning(learns optimal policy independent of behavior) 
 - Proven to converge under suitable conditions
+
+### 5.1 Intuition and Working of Q-Learning
+
+Q-Learning is a model-free reinforcement learning algorithm that allows an agent to learn optimal decisions purely through interaction with the environment. Unlike model-based approaches, the agent does not need prior knowledge of transition probabilities or reward functions. Instead, it learns from experience using trial-and-error.
+
+An intuitive way to understand Q-learning is through a learning-from-mistakes analogy. Suppose a system incorrectly identifies an apple as a mango and receives feedback that it is wrong. Over time, by correcting such mistakes, the system improves its predictions. Similarly, in Q-learning, the agent explores different actions, receives feedback in the form of rewards, and gradually improves its decision-making.
+
+---
+
+### Q-Values and Q-Table
+
+The central idea in Q-learning is the estimation of **Q-values**, which represent the expected cumulative reward of taking an action in a given state.
+
+$$
+Q(s,a) = \mathbb{E}[G_t \mid S_t = s, A_t = a]
+$$
+
+These values are stored in a **Q-table**, which acts as the agent’s memory:
+
+- Rows represent states  
+- Columns represent actions  
+- Each entry stores the Q-value for a state-action pair  
+
+As the agent interacts with the environment, the Q-table is updated and gradually converges to the optimal action-value function.
+
+---
+
+### Temporal Difference (TD) Update Rule
+
+Q-learning updates its estimates using Temporal Difference (TD) learning.
+
+$$
+Q(s,a) \leftarrow Q(s,a) + \alpha \Big[r + \gamma \max_{a'} Q(s',a') - Q(s,a)\Big]
+$$
+
+where:
+- $s$ = current state  
+- $a$ = action taken  
+- $s'$ = next state  
+- $r$ = reward received  
+- $\gamma$ = discount factor  
+- $\alpha$ = learning rate  
+
+The term:
+
+$$
+r + \gamma \max_{a'} Q(s',a')
+$$
+
+is called the **TD target**, and the difference from the current estimate is the **TD error**.
+
+---
+
+### Exploration vs Exploitation (ε-Greedy Policy)
+
+A key challenge in Q-learning is balancing exploration and exploitation.
+
+- With probability $1 - \epsilon$: choose the best known action (exploitation)  
+- With probability $\epsilon$: choose a random action (exploration)  
+
+This ensures that the agent continues to explore the environment while improving its policy.
+
+---
+
+### Step-by-Step Algorithm
+
+The Q-learning process can be summarized as:
+
+1. Initialize Q-table arbitrarily  
+2. Start from an initial state $s$  
+3. Choose action $a$ using ε-greedy policy  
+4. Execute action → observe reward $r$ and next state $s'$  
+5. Update Q-value using TD rule  
+6. Set $s \leftarrow s'$  
+7. Repeat until terminal state  
+
+Over many episodes, the Q-values converge to optimal values, and the agent learns the optimal policy.
+
+---
+
+### Bellman Optimality Interpretation
+
+Q-learning is based on the Bellman optimality equation:
+
+$$
+Q^*(s,a) = R(s,a) + \gamma \max_{a'} Q^*(s',a')
+$$
+
+This expresses that the optimal value of a state-action pair equals the immediate reward plus the best possible future reward.
+
+Thus, Q-learning can be viewed as an iterative method for solving this equation.
+
+---
+
+### Summary
+
+Q-learning is powerful because it:
+- Learns directly from experience (model-free)  
+- Uses bootstrapping (TD learning)  
+- Balances exploration and exploitation  
+- Converges to optimal policy under suitable conditions  
+
+It forms the foundation for many advanced RL methods such as Deep Q-Networks.
+
 
 ---
 
