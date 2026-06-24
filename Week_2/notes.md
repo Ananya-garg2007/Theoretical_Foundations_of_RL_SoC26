@@ -236,7 +236,7 @@ Over many episodes, the Q-values converge to optimal values, and the agent learn
 Q-learning is based on the Bellman optimality equation:
 
 $$
-Q^_(s,a) = R(s,a) + \gamma \max_{a'} Q^_(s',a')
+Q^*(s,a) = R(s,a) + \gamma \max_{a'} Q^*(s',a')
 $$
 
 This expresses that the optimal value of a state-action pair equals the immediate reward plus the best possible future reward.
