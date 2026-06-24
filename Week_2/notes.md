@@ -303,27 +303,6 @@ This equation forms the bridge between **value-based** and **policy-based** rein
 - Therefore, many algorithms focus on learning $Q^*$  
 - Once $Q^*$ is learned, decision-making becomes straightforward  
 
----
-
-#### Common Confusions
-
-- **“π is always probabilistic”**  
-  → Not necessarily. It can be deterministic or stochastic  
-
-- **“* means multiplication”**  
-  → No, it denotes optimality  
-
-- **“Q is just immediate reward”**  
-  → No, it includes both immediate and future rewards  
-
----
-
-#### Mental Model
-
-- $Q(s,a)$ → How good is this action?  
-- $\arg\max$ → Choose the best action  
-- $\pi(s)$ → What action should I take?  
-- $\pi^*$ → Best possible decision rule  
 
 ---
 
