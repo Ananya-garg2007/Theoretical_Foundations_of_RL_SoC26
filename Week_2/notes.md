@@ -227,28 +227,6 @@ and $A_t$ is the **Advantage estimate** (measuring how much better an action is 
 
 ---
 
-7. Policy Gradient and PPO
-
-Instead of learning value functions, policy gradient methods directly optimize the policy.
-
-The objective is:
-
-$$J(\theta) = \mathbb{E}{\pi\theta}[G_t]$$
-
-Using the likelihood ratio trick, the gradient becomes:
-
-$$\nabla J(\theta) = \mathbb{E}[\nabla \log \pi_\theta(a|s) Q^\pi(s,a)]$$
-
-Proximal Policy Optimization (PPO) improves stability by limiting policy updates:
-
-$$L^{PPO}(\theta) = \mathbb{E}\left[\min\left(r(\theta)A, \text{clip}(r(\theta), 1-\epsilon, 1+\epsilon)A\right)\right]$$
-
-where:
-
-$$r(\theta) = \frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}$$
-
-This clipping prevents excessively large updates, ensuring stable learning.
-
 ## 8. Deep Deterministic Policy Gradient (DDPG)
 
 DDPG is an off-policy **Actor-Critic** framework engineered specifically for environments with continuous action spaces (where finding $\max_a Q(s,a)$ over infinite options is intractable).
