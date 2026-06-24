@@ -130,7 +130,7 @@ Q-learning is a fundamental TD control algorithm that learns the optimal action-
 It is based on the Bellman optimality equation:
 
 $$
-Q^_(s,a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s',a')]
+Q^_(s,a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^_(s',a')]
 $$
 
 Update rule:
