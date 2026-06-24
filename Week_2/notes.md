@@ -123,9 +123,9 @@ where $\alpha$ is the learning rate.
 
 Temporal Difference (TD) learning combines the model-free benefits of Monte Carlo methods with the iterative updates of Dynamic Programming. Unlike MC, TD methods do not wait for the end of an episode; they update estimates after a single step by **bootstrapping** off existing downstream estimates.
 
-Q-learning is an off-policy TD control algorithm aimed at directly approximating the optimal action-value function $Q^*$, independent of the policy being executed by the agent. It is fundamentally anchored to the **Bellman Optimality Equation**:
+Q-learning is an off-policy TD control algorithm aimed at directly approximating the optimal action-value function $Q^{\ast}$, independent of the policy being executed by the agent. It is fundamentally anchored to the **Bellman Optimality Equation**:
 
-$$Q^*(s, a) = \mathbb{E}\left[ R_{t+1} + \gamma \max_{a'} Q^*(S_{t+1}, a') \;\middle|\; S_t=s, A_t=a \right]$$
+$$Q^{\ast}(s, a) = \mathbb{E}\left[ R_{t+1} + \gamma \max_{a'} Q^{\ast}(S_{t+1}, a') \;\middle|\; S_t=s, A_t=a \right]$$
 
 ### 5.1 Intuition and Working of Q-Learning
 
