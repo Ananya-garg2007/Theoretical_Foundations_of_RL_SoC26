@@ -38,7 +38,7 @@ The discount factor γ ensures that future rewards are weighted less than immedi
 The goal is to find an optimal policy π* such that:
 
 $$
-\pi^* = \arg\max_\pi \mathbb{E}_\pi [G_t]
+\pi^{*} = \arg\max_\pi \mathbb{E}_\pi [G_t]
 $$
 
 
@@ -131,7 +131,7 @@ It is based on the Bellman optimality equation:
 
 ### Bellman Optimality Equation
 
-Q*(s, a) = E[ R_{t+1} + γ max_{a'} Q*(s', a') ]
+Q^{*}(s, a) = \mathbb{E}[ R_{t+1} + \gamma \max_{a'} Q^{*}(s', a') ]
 
 Update rule:
 
@@ -236,7 +236,7 @@ Over many episodes, the Q-values converge to optimal values, and the agent learn
 Q-learning is based on the Bellman optimality equation:
 
 $$
-Q^*(s,a) = R(s,a) + \gamma \max_{a'} Q^*(s',a')
+Q^{*}(s,a) = \mathbb{E}_{s'}\left[ R(s,a) + \gamma \max_{a'} Q^{*}(s',a') \right]
 $$
 
 This expresses that the optimal value of a state-action pair equals the immediate reward plus the best possible future reward.
@@ -259,10 +259,10 @@ It forms the foundation for many advanced RL methods such as Deep Q-Networks.
 
 #### Putting It All Together
 
-Once the optimal action-value function $Q^*(s,a)$ is known, the optimal policy can be directly derived as:
+Once the optimal action-value function $Q^{*}(s,a)$ is known, the optimal policy can be directly derived as:
 
 $$
-\pi^*(s) = \arg\max_a Q^*(s,a)
+\pi^{*}(s) = \arg\max_a Q^{*}(s,a)
 $$
 
 #### Step-by-step interpretation:
@@ -281,7 +281,7 @@ In plain terms:
 
 Suppose the agent is in a state (for example, at a crossroads):
 
-| Action | $Q^*(s,a)$ |
+| Action | $Q^{*}(s,a)$ |
 |--------|-----------|
 | Left   | 4         |
 | Right  | 12        |
@@ -290,7 +290,7 @@ Suppose the agent is in a state (for example, at a crossroads):
 Then:
 
 $$
-\pi^*(s) = \text{Right}
+\pi^{*}(s) = \text{Right}
 $$
 
 because it has the highest Q-value.
@@ -301,9 +301,9 @@ because it has the highest Q-value.
 
 This equation forms the bridge between **value-based** and **policy-based** reinforcement learning:
 
-- If we know $Q^*(s,a)$, we can directly obtain the optimal policy  
-- Therefore, many algorithms focus on learning $Q^*$  
-- Once $Q^*$ is learned, decision-making becomes straightforward  
+- If we know $Q^{*}(s,a)$, we can directly obtain the optimal policy  
+- Therefore, many algorithms focus on learning $Q^{*}$  
+- Once $Q^{*}$ is learned, decision-making becomes straightforward  
 
 ---
 
