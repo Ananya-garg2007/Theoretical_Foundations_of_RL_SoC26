@@ -193,24 +193,19 @@ Knowing $Q^*(s,a)$ eliminates the need for deep planning; decision-making collap
 
 ## 6. Deep Q-Networks (DQN)
 
-When confronting environments with massive or continuous state spaces (e.g., chess or raw screen pixels), maintaining an explicit lookup table becomes impossible. Deep Q-Networks solve this by substituting the table with a parameterized function approximator—a deep neural network:
+When confronting environments with massive or continuous state spaces like chess or raw screen pixels, maintaining a table becomes impossible. Deep Q-Networks solve this by substituting the table with a parameterized function approximator—a deep neural network:
 
 $$Q(s,a) \approx Q(s,a;\theta)$$
 
-where $\theta$ represents the weights of the network. The network is trained by minimizing a mean-squared Bellman error loss function at each iteration $i$:
+where $\theta$ represents the weights of the network. The network is trained by minimizing a mean-squared Bellman error loss function at each iteration $i$.
 
-$$L_i(\theta_i) = \mathbb{E}_{(s,a,r,s') \sim \mathcal{D}} \left[ \left( r + \gamma \max_{a'} Q(s', a'; \theta_i^-) - Q(s, a; \theta_i) \right)^2 \right]$$
-
-Standard non-linear regression is notoriously unstable in RL because consecutive states are highly correlated and targets change continuously. DQN implements two critical stabilizing architectures:
-
-* **Experience Replay ($\mathcal{D}$):** Transitions $(s, a, r, s')$ are collected and saved into a storage buffer. Training updates sample randomly from this buffer, breaking the temporal correlation of consecutive observations.
-* **Target Networks ($\theta^-$):** A separate set of weights $\theta^-$ is used to compute the target values. These weights are kept frozen and are only updated to match the active training weights $\theta$ at periodic intervals, preventing the target from shifting wildly during gradient updates.
+Standard non-linear regression is very unstable in RL because consecutive states are highly correlated and targets change continuously. 
 
 ---
 
 ## 7. Policy Gradient and PPO
 
-Rather than evaluating state configurations to infer a policy, **Policy Gradient** methods parameterize the policy directly as $\pi_\theta(a \mid s)$ and optimize it using gradient ascent to maximize expected total return:
+Rather than evaluating state configurations to infer a policy, **Policy Gradient** methods parameterize the policy directly as $\pi_\theta(a \mid s)$ and optimize it using **gradient ascent** to maximize expected total return:
 
 $$J(\theta) = \mathbb{E}_{\pi_\theta}[G_t]$$
 
@@ -231,6 +226,28 @@ $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \m
 and $A_t$ is the **Advantage estimate** (measuring how much better an action is relative to the baseline state value). By clipping $r_t(\theta)$ within a small window $[1-\epsilon, 1+\epsilon]$, PPO ensures that step updates are incremental and stable.
 
 ---
+
+7. Policy Gradient and PPO
+
+Instead of learning value functions, policy gradient methods directly optimize the policy.
+
+The objective is:
+
+$$J(\theta) = \mathbb{E}{\pi\theta}[G_t]$$
+
+Using the likelihood ratio trick, the gradient becomes:
+
+$$\nabla J(\theta) = \mathbb{E}[\nabla \log \pi_\theta(a|s) Q^\pi(s,a)]$$
+
+Proximal Policy Optimization (PPO) improves stability by limiting policy updates:
+
+$$L^{PPO}(\theta) = \mathbb{E}\left[\min\left(r(\theta)A, \text{clip}(r(\theta), 1-\epsilon, 1+\epsilon)A\right)\right]$$
+
+where:
+
+$$r(\theta) = \frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}$$
+
+This clipping prevents excessively large updates, ensuring stable learning.
 
 ## 8. Deep Deterministic Policy Gradient (DDPG)
 
