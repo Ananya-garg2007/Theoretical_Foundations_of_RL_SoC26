@@ -165,11 +165,11 @@ To guarantee convergence to the true optimal values, the agent must balance choo
 6. Set the state $s \leftarrow s'$.
 7. Repeat steps 3–6 until a terminal state is reached, iterating across many distinct episodes.
 
-### 5.2 From Optimal Q-Values to an Optimal Policy
+## 5.2 From Optimal Q-Values to an Optimal Policy
 
-Once the Q-values have successfully converged to the true optimal function $Q^*(s,a)$, extracting the optimal policy $\pi^*(s)$ is straightforward:
+Once the Q-values have successfully converged to the true optimal function $Q^{\ast}(s,a)$, extracting the optimal policy $\pi^{\ast}(s)$ is straightforward:
 
-$$\pi^*(s) = \arg\max_a Q^*(s,a)$$
+$$\pi^{\ast}(s) = \arg\max_a Q^{\ast}(s,a)$$
 
 The equation indicates that the agent can behave optimally by performing a local, greedy evaluation over its actions at any state, choosing whichever action yields the highest expected long-term return.
 
