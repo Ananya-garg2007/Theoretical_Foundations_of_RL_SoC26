@@ -121,6 +121,7 @@ Monte Carlo methods are:
 
 ## 5. Temporal Difference Learning and Q-Learning
 
+Temporal Difference is calculated by comparing the current state and action values with the previous ones. It provides a way to learn directly from experience, without needing a model of the environment.
 Temporal Difference (TD) learning combines ideas from Monte Carlo methods and dynamic programming.
 
 Q-learning is a fundamental TD control algorithm that learns the optimal action-value function directly.
@@ -146,9 +147,14 @@ Key ideas:
 
 ### 5.1 Intuition and Working of Q-Learning
 
-Q-Learning is a model-free reinforcement learning algorithm that allows an agent to learn optimal decisions purely through interaction with the environment. Unlike model-based approaches, the agent does not need prior knowledge of transition probabilities or reward functions. Instead, it learns from experience using trial-and-error.
+Q-Learning is a model-free reinforcement learning algorithm that allows an agent to learn optimal decisions purely through interaction with the environment. 
 
-An intuitive way to understand Q-learning is through a learning-from-mistakes analogy. Suppose a system incorrectly identifies an apple as a mango and receives feedback that it is wrong. Over time, by correcting such mistakes, the system improves its predictions. Similarly, in Q-learning, the agent explores different actions, receives feedback in the form of rewards, and gradually improves its decision-making.
+Unlike model-based approaches, the agent does not need prior knowledge of transition probabilities or reward functions. Instead, it learns from experience using trial-and-error.
+
+An intuitive way to understand Q-learning is through a learning-from-mistakes analogy:
+  Suppose a system incorrectly identifies an apple as a mango and receives feedback that it is wrong. 
+  Over time, by correcting such mistakes, the system improves its predictions. 
+  Similarly, in Q-learning, the agent explores different actions, receives feedback in the form of rewards, and gradually improves its decision-making.
 
 ---
 
