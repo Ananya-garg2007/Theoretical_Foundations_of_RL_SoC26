@@ -253,6 +253,77 @@ Q-learning is powerful because it:
 
 It forms the foundation for many advanced RL methods such as Deep Q-Networks.
 
+### 5.2 From Optimal Q-Values to Optimal Policy
+
+#### Putting It All Together
+
+Once the optimal action-value function $Q^*(s,a)$ is known, the optimal policy can be directly derived as:
+
+$$
+\pi^*(s) = \arg\max_a Q^*(s,a)
+$$
+
+#### Step-by-step interpretation:
+
+- Consider all possible actions in a given state $s$  
+- Compute the optimal Q-values for each action  
+- Select the action that has the highest Q-value  
+
+In plain terms:
+
+> The optimal policy always chooses the action that leads to the highest long-term reward.
+
+---
+
+#### Concrete Example
+
+Suppose the agent is in a state (for example, at a crossroads):
+
+| Action | $Q^*(s,a)$ |
+|--------|-----------|
+| Left   | 4         |
+| Right  | 12        |
+| Back   | 1         |
+
+Then:
+
+$$
+\pi^*(s) = \text{Right}
+$$
+
+because it has the highest Q-value.
+
+---
+
+#### Why This is Important
+
+This equation forms the bridge between **value-based** and **policy-based** reinforcement learning:
+
+- If we know $Q^*(s,a)$, we can directly obtain the optimal policy  
+- Therefore, many algorithms focus on learning $Q^*$  
+- Once $Q^*$ is learned, decision-making becomes straightforward  
+
+---
+
+#### Common Confusions
+
+- **“π is always probabilistic”**  
+  → Not necessarily. It can be deterministic or stochastic  
+
+- **“* means multiplication”**  
+  → No, it denotes optimality  
+
+- **“Q is just immediate reward”**  
+  → No, it includes both immediate and future rewards  
+
+---
+
+#### Mental Model
+
+- $Q(s,a)$ → How good is this action?  
+- $\arg\max$ → Choose the best action  
+- $\pi(s)$ → What action should I take?  
+- $\pi^*$ → Best possible decision rule  
 
 ---
 
