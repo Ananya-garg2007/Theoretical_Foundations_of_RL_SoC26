@@ -113,6 +113,7 @@ The immediate reward for taking action $a$ in state $s$ is expected as $R(s,a)$.
 $$Q^\pi(s,a) = R(s,a) + \gamma \sum_{s' \in S} P(s' \mid s, a) \mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s']$$
 
 We know that 
+
 $$
 \mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s'] = V^\pi(s')
 $$.
