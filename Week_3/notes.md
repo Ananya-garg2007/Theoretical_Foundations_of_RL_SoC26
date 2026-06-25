@@ -182,20 +182,37 @@ By inductive unrolling of the inequality, it holds that $V^{\pi'}(s) \geq V^\pi(
 Value Iteration collapses the evaluation and improvement loop into a single step by updating the value function directly via the Bellman Optimality Equation. It skips explicit policy tracking completely until convergence is achieved.
 
 ```text
-Initialize V(s) = 0 for all s in S, and V(terminal) = 0
-Parameter: \theta > 0
+Initialize:
+    V(s) ← 0, ∀ s ∈ S
+    V(terminal) ← 0
+    θ > 0
 
-Loop:
-  \Delta \leftarrow 0
-  For each s in S:
-    v \leftarrow V(s)
-    V(s) \leftarrow \max_{a} \sum_{s'} P_{ss'}^a [ R_{ss'}^a + \gamma V(s') ]
-    \Delta \leftarrow \max(\Delta, |v - V(s)|)
-until \Delta < \theta
+--------------------------------------------------
 
-Output a deterministic optimal policy \pi \approx \pi^{\ast} such that:
-\pi(s) = \arg\max_{a} \sum_{s'} P_{ss'}^a [ R_{ss'}^a + \gamma V(s') ]
+Repeat:
+    Δ ← 0
 
+    For each state s ∈ S:
+        v ← V(s)
+
+        V(s) ← maxₐ
+                ∑ₛ′ P(s′ | s, a)
+                [R(s, a, s′) + γV(s′)]
+
+        Δ ← max(Δ, |v − V(s)|)
+
+Until Δ < θ
+
+--------------------------------------------------
+
+Extract the Optimal Policy
+
+For each state s ∈ S:
+    π(s) ← arg maxₐ
+            ∑ₛ′ P(s′ | s, a)
+            [R(s, a, s′) + γV(s′)]
+
+Return V ≈ V*, π ≈ π*
 ```
 
 ---
