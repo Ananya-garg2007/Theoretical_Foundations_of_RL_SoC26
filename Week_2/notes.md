@@ -1,5 +1,21 @@
 # Week 2: Reinforcement Learning Algorithms and Markov Decision Processes
 
+**Course/Project:** Theoretical Foundations of RL (SoC 2026)
+
+**Topic:** 
+- Q-learning and Monte Carlo methods
+- Proximal Policy Optimization (PPO)
+- Deep Deterministic Policy Gradient (DDPG)
+- Soft Actor-Critic (SAC)
+- Deep Q-Network (optional)
+- MDPs: (S, A, P, R, gamma), Markov property, policies
+- State-value and action-value functions
+
+**Resources Covered:** 
+- David Silver Lectures 1-2
+- Sutton and Barto (2020), Ch. 2-3
+- GeeksforGeeks (Q-learning, Monte Carlo): https://www.geeksforgeeks.org/q-learning-in-python/ 
+
 ---
 
 ## 1. Markov Decision Processes (MDPs)
