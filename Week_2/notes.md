@@ -69,7 +69,7 @@ To evaluate the quality of policies, we define two types of value functions.
 $$V^\pi(s) = \mathbb{E}_\pi [G_t \mid S_t = s]$$
 
 
-- **Action-Value Function** ($Q^\pi(s,a)$) : The expected return starting from state $s$, taking action $a$, and subsequently following policy $\pi$.
+- **Action-Value Function** ($$Q^\pi(s,a)$$) : The expected return starting from state $s$, taking action $a$, and subsequently following policy $\pi$.
 
 $$Q^\pi(s,a) = \mathbb{E}_\pi [G_t \mid S_t = s, A_t = a]$$
 
