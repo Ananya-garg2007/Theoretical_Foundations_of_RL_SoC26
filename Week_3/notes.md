@@ -82,21 +82,33 @@ Dynamic Programming (DP) uses the Bellman equations as iterative update rules. T
 
 Iterative Policy Evaluation computes the state-value function $V^\pi$ for an arbitrary policy $\pi$. It iteratively applies the Bellman Expectation Equation, turning it into an assignment rule.
 
+
 ```text
-Input: Policy \pi to be evaluated
-Initialize V(s) = 0 for all s in S, and V(terminal) = 0
-Parameter: \theta > 0
+Input:
+    Policy π
 
-Loop:
-  \Delta \leftarrow 0
-  For each s in S:
-    v \leftarrow V(s)
-    V(s) \leftarrow \sum_{a} \pi(a \mid s) \sum_{s'} P_{ss'}^a [ R_{ss'}^a + \gamma V(s') ]
-    \Delta \leftarrow \max(\Delta, |v - V(s)|)
-until \Delta < \theta
-Output: V \approx V^\pi
+Initialize:
+    V(s) ← 0, ∀ s ∈ S
+    V(terminal) ← 0
+    θ > 0
 
+Repeat:
+    Δ ← 0
+
+    For each state s ∈ S:
+        v ← V(s)
+
+        V(s) ← ∑ₐ π(a | s)
+                ∑ₛ′ P(s′ | s, a)
+                [R(s, a, s′) + γV(s′)]
+
+        Δ ← max(Δ, |v − V(s)|)
+
+Until Δ < θ
+
+Return V ≈ V^π
 ```
+
 
 ---
 
