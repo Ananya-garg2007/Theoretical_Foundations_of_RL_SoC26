@@ -116,7 +116,7 @@ We know that
 
 $$
 \mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s'] = V^\pi(s')
-$$.
+$$
 
 The value of that subsequent state $V^\pi(s')$ can be written in terms of $Q^\pi$ by averaging over all possible next actions $a'$ the policy could select:
 
