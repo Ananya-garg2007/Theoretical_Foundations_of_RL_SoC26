@@ -91,7 +91,7 @@ To calculate this expectation explicitly, we sum over all possible actions the a
 
 $$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \sum_{s' \in S} P(s' \mid s, a) \left[ R(s,a) + \gamma \mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s'] \right]$$
 
-By definition, $\mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s'] = V^\pi(s')$. Substituting this back yields the final recursive equation:
+By definition, $$\mathbb{E}_\pi [G_{t+1} \mid S_{t+1} = s'] = V^\pi(s')$$. Substituting this back yields the final recursive equation:
 
 $$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \sum_{s' \in S} P(s' \mid s, a) \left[ R(s,a) + \gamma V^\pi(s') \right]$$
 
