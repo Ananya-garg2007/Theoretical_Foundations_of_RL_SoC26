@@ -2,11 +2,14 @@
 
 **Course/Project:** Theoretical Foundations of RL (SoC 2026)
 
-**Topic:** On-Policy vs. Off-Policy Learning, SARSA, and Q-Learning
+**Topic:** 
+- On-Policy vs. Off-Policy Learning
+- SARSA
+- Q-Learning
 
-**Resources Covered:** * Sutton and Barto (2020), Chapters 6 and 7
-
-* David Silver's RL Course, Lecture 5 (Control)
+**Resources Covered:** 
+- Sutton and Barto (2020), Chapters 6 and 7
+- David Silver's RL Course, Lecture 5 (Control)
 
 ---
 
