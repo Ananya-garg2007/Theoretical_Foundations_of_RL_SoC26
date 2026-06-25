@@ -1,6 +1,6 @@
 # Week 2: Reinforcement Learning Algorithms and Markov Decision Processes
 
-**Course/Project:** Theoretical Foundations of RL (SoC 2026)
+**Project:** Theoretical Foundations of RL (SoC 2026)
 
 **Topic:** 
 - Q-learning and Monte Carlo methods
