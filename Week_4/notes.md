@@ -1,6 +1,6 @@
 # Week 4 Report: Temporal Difference Control
 
-**Course/Project:** Theoretical Foundations of RL (SoC 2026)
+**Project:** Theoretical Foundations of RL (SoC 2026)
 
 **Topic:** 
 - On-Policy vs. Off-Policy Learning
