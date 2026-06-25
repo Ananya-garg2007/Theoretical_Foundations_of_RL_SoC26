@@ -31,7 +31,7 @@ A full Model-Based environment is formalized as a Markov Decision Process (MDP) 
 
 ### 1.2 The Bellman Expectation Equation
 
-The Expectation equation answers the question: *"If I am stuck acting according to my current, messy policy $$\pi$$, what is the long-term value of my current state?"* It represents a linear system of equations across the state space.
+The Expectation equation answers the question: "If I am stuck acting according to my current, messy policy $\pi$, what is the long-term value of my current state?"* It represents a linear system of equations across the state space.
 
 #### Mathematical Derivation:
 
