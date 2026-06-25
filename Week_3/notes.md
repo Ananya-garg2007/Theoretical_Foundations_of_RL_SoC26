@@ -31,7 +31,7 @@ A full Model-Based environment is formalized as a Markov Decision Process (MDP) 
 
 ### 1.2 The Bellman Expectation Equation
 
-The Expectation equation answers the question: *"If I am stuck acting according to my current, messy policy $\pi$, what is the long-term value of my current state?"* It represents a linear system of equations across the state space.
+The Expectation equation answers the question: *"If I am stuck acting according to my current, messy policy $$\pi$$, what is the long-term value of my current state?"* It represents a linear system of equations across the state space.
 
 #### Mathematical Derivation:
 
@@ -44,7 +44,7 @@ By applying the law of total expectation to condition on the action taken and th
 
 $$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \left( R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a V^\pi(s') \right)$$
 
-* **The Outer Sum ($\sum_a \pi(a \mid s)$):** This accounts for your internal policy randomness (e.g., if you choose between actions via a probability distribution).
+* **The Outer Sum** $$(\sum_a \pi(a \mid s))$$: This accounts for your internal policy randomness (e.g., if you choose between actions via a probability distribution).
 * **The Inner Sum ($\sum_{s'} P_{ss'}^a$):** This accounts for the environment's structural transition randomness.
 * **Linearity:** Because there are no operators like $\max$ or $\min$, this is a standard system of linear equations. If you have $N$ states, you can solve this exactly using matrix inversion ($V = (I - \gamma P)^{-1} R$).
 
