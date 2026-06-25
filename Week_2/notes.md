@@ -261,8 +261,8 @@ and $A_t$ is the **Advantage estimate** (measuring how much better an action is 
 
 DDPG is an off-policy **Actor-Critic** framework engineered specifically for environments with continuous action spaces (where finding $\max_a Q(s,a)$ over infinite options is intractable).
 
-* **Actor Network** $$\mu_\theta(s)$$: Deterministically maps a state directly to a specific continuous action output.
-* **Critic Network** $$Q_\phi(s,a)$$: Evaluates the chosen action, learning the standard action-value function via regression targets.
+* **Actor Network** $$(\mu_\theta(s))$$: Deterministically maps a state directly to a specific continuous action output.
+* **Critic Network** $$(Q_\phi(s,a))$$: Evaluates the chosen action, learning the standard action-value function via regression targets.
 
 The actor's parameter weights are optimized by taking the gradient of the critic's output directly with respect to the action values, applying the chain rule:
 
