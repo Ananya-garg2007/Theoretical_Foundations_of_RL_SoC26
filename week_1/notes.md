@@ -1,5 +1,18 @@
 # Week 1: Introduction to Reinforcement Learning
 
+**Project:** Theoretical Foundations of RL (SoC 2026)
+
+**Topic:** 
+- Agent-environment interaction, return, policies, value functions
+- Exploration vs exploitation (high-level intuition)
+- Formalizing RL problems as optimization
+
+**Resources Covered:** 
+- David Silver Lecture 1: https://youtube.com/playlist?list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-&si=f71naScldk1Mbfwi
+- Sutton and Barto (2020), Ch. 1: http://incompleteideas.net/book/RLbook2020.pdf
+- OpenAI Spinning Up: https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+
+---
 
 ## Introduction
 
