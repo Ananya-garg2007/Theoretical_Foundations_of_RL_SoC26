@@ -63,7 +63,7 @@ Thus, reinforcement learning can be framed as an optimization problem over a pol
 
 To evaluate the quality of policies, we define two types of value functions.
 
-- **State-Value Function** ($V^\pi(s)$) : The expected return starting from state $s$ and following policy $\pi$ thereafter.
+- **State-Value Function** ($$V^\pi(s)$$) : The expected return starting from state $s$ and following policy $\pi$ thereafter.
 
 
 $$V^\pi(s) = \mathbb{E}_\pi [G_t \mid S_t = s]$$
