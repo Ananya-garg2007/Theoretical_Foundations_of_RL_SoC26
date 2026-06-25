@@ -121,26 +121,48 @@ Policy Iteration systematically improves performance by alternating between two 
 
 ```text
 1. Initialization
-Initialize V(s) = 0 and \pi(s) \in A arbitrarily for all s in S
+
+Initialize:
+    V(s) ← 0, ∀ s ∈ S
+    π(s) ← arbitrary action, ∀ s ∈ S
+
+--------------------------------------------------
 
 2. Policy Evaluation
-Loop:
-  \Delta \leftarrow 0
-  For each s in S:
-    v \leftarrow V(s)
-    V(s) \leftarrow \sum_{s'} P_{s s'}^{\pi(s)} [ R_{s s'}^{\pi(s)} + \gamma V(s') ]
-    \Delta \leftarrow \max(\Delta, |v - V(s)|)
-until \Delta < \theta
+
+Repeat:
+    Δ ← 0
+
+    For each state s ∈ S:
+        v ← V(s)
+
+        V(s) ← ∑ₛ′ P(s′ | s, π(s))
+                [R(s, π(s), s′) + γV(s′)]
+
+        Δ ← max(Δ, |v − V(s)|)
+
+Until Δ < θ
+
+--------------------------------------------------
 
 3. Policy Improvement
-policy_stable \leftarrow true
-For each s in S:
-  old_action \leftarrow \pi(s)
-  \pi(s) \leftarrow \arg\max_{a} \sum_{s'} P_{ss'}^a [ R_{ss'}^a + \gamma V(s') ]
-  If old_action \neq \pi(s), then policy_stable \leftarrow false
 
-If policy_stable is true, then stop and return V and \pi; else go to Step 2
+policy_stable ← true
 
+For each state s ∈ S:
+    old_action ← π(s)
+
+    π(s) ← arg maxₐ
+            ∑ₛ′ P(s′ | s, a)
+            [R(s, a, s′) + γV(s′)]
+
+    If old_action ≠ π(s):
+        policy_stable ← false
+
+If policy_stable:
+    Return V, π
+Else:
+    Go to Step 2
 ```
 
 #### The Policy Improvement Theorem:
