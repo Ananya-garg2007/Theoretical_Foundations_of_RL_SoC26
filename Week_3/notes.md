@@ -1,6 +1,6 @@
 # Week 3: Dynamic Programming & Model-Free Prediction
 
-**Course/Project:** Theoretical Foundations of RL (SoC 2026)
+**Project:** Theoretical Foundations of RL (SoC 2026)
 
 **Topic:** 
 - Bellman expectation and optimality equations
