@@ -1,5 +1,20 @@
 # Week 3: Dynamic Programming & Model-Free Prediction
 
+**Course/Project:** Theoretical Foundations of RL (SoC 2026)
+
+**Topic:** 
+- Bellman expectation and optimality equations
+- Policy evaluation, policy iteration, value iteration
+- Convergence intuition
+- Monte Carlo vs TD learning
+- TD(0), TD(lambda)
+- Bias-variance tradeoff
+
+**Resources Covered:** 
+- David Silver Lectures 3-4
+- Sutton and Barto (2020), Ch. 4-6
+
+---
 
 ## 1. The Bellman Equations: Expectation vs. Optimality
 
