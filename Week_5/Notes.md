@@ -1,5 +1,19 @@
 # Week 5: Value Function Approximation and Deep Q-Networks
 
+**Project:** Theoretical Foundations of RL (SoC 2026)
+
+**Topic:** 
+- Function approximation in RL
+- Linear vs nonlinear approximators
+- DQN and stability tricks (target networks, replay buffer)
+
+**Resources Covered:** 
+- David Silver Lecture 6: playlist link above
+- Sutton and Barto (2020), Ch. 9
+- DQN paper (Nature 2015): https://www.nature.com/articles/nature14236
+
+---
+
 ## 1. Why Function Approximation?
 
 In classical reinforcement learning algorithms such as tabular Q-learning, the agent stores a separate Q-value for every possible state-action pair in a Q-table. This approach works well when the number of states and actions is relatively small. However, in many real-world problems such as robotics, autonomous driving, or Atari games, the state space becomes extremely large or even continuous. In these situations, maintaining a Q-table becomes computationally impossible because the number of state-action pairs grows exponentially.
