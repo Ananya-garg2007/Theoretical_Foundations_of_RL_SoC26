@@ -182,7 +182,3 @@ Modern reinforcement learning can be viewed as a gradual evolution:
 > Q-learning introduced value-based learning. $\rightarrow$ DQN replaced Q-tables with neural networks. $\rightarrow$ Policy Gradient methods optimized policies directly. $\rightarrow$ Actor-Critic combined both ideas. $\rightarrow$ PPO, DDPG, and SAC refined Actor-Critic methods to achieve greater stability, sample efficiency, and scalability.
 
 Thus, modern deep reinforcement learning is not a completely different field—it is a natural extension of the classical reinforcement learning algorithms studied in earlier weeks.
-
-## Conclusion
-
-Week 7 brings together many of the central ideas in reinforcement learning. Model-based methods such as Dyna-Q demonstrate how planning can dramatically improve sample efficiency, while exploration strategies like $\epsilon$-greedy and UCB illustrate different approaches to balancing exploration and exploitation. Finally, actor-critic algorithms such as PPO, DDPG, and SAC show how reinforcement learning has evolved to solve complex, high-dimensional problems that were beyond the reach of classical tabular methods.
