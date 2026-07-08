@@ -101,10 +101,9 @@ Q^*(s,a)
 \mathbb{E}\left[
 R_{t+1}
 +
-\gamma
-\max_{a'} Q^*(S_{t+1},a')
+\gamma \max_{a'} Q^*(S_{t+1},a')
 \mid
-S_t=s,\; A_t=a
+S_t=s,\;A_t=a
 \right]
 $$
 
