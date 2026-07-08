@@ -2,207 +2,184 @@
 
 ## 1. Why Function Approximation?
 
-Classical reinforcement learning algorithms such as Q-learning maintain a Q-table that stores one value for every state-action pair.
+In classical reinforcement learning algorithms such as tabular Q-learning, the agent stores a separate Q-value for every possible state-action pair in a Q-table. This approach works well when the number of states and actions is relatively small. However, in many real-world problems such as robotics, autonomous driving, or Atari games, the state space becomes extremely large or even continuous. In these situations, maintaining a Q-table becomes computationally impossible because the number of state-action pairs grows exponentially.
 
-While this works well for small environments, it quickly becomes impractical as the state space grows. Consider applications such as Atari games, robotics, or autonomous driving, where the number of possible states is extremely large or even continuous. In such cases, storing and updating a Q-table becomes computationally impossible.
+To overcome this limitation, reinforcement learning uses function approximation. Instead of storing a value for every state-action pair, the agent learns a function that estimates these values.
 
-Instead of explicitly storing values for every state-action pair, we approximate the value function using a parameterized function
+Instead of learning $Q(s,a)$ for every individual state-action pair, we learn:
 
-V(s;\theta)
-or
-Q(s,a;\theta)
+$$Q(s,a;\theta)$$
 
-where θ represents the parameters of the approximator.
+where $\theta$ represents the parameters of the approximating function.
 
-The objective is therefore shifted from learning individual values to learning the parameters θ that best approximate the true value function.
+Thus, the learning problem changes from storing values to learning the parameters that best approximate the true value function.
 
 ---
 
 ## 2. Linear Function Approximation
 
-The simplest approximation assumes that the value function is a linear combination of features.
+The simplest form of function approximation assumes that the value function is a linear combination of manually designed features.
 
-Suppose each state is represented by a feature vector
+Suppose each state is represented by a feature vector $\phi(s)$. Then the value function is approximated as:
 
-φ(s)
+$$V(s;\theta) = \theta^T \phi(s)$$
 
-Then,
+Similarly, the action-value function becomes:
 
-V(s;\theta)=\theta^T\phi(s)
+$$Q(s,a;\theta) = \theta^T \phi(s,a)$$
 
-Similarly,
+where:
+* **$\theta$** is the weight vector.
+* **$\phi(s,a)$** is the feature vector describing the state-action pair.
 
-Q(s,a;\theta)=\theta^T\phi(s,a)
+The objective of learning is to update the weights $\theta$ so that the predicted values become as close as possible to the true expected returns.
 
-Advantages
+**Advantages:**
+* Computationally efficient.
+* Easy to interpret.
+* Strong theoretical guarantees.
 
-- Simple and computationally efficient
-- Easy to analyze mathematically
-- Convergence guarantees exist under suitable assumptions
-
-Limitations
-
-- Unable to model highly nonlinear relationships
-- Performance depends heavily on manually designed features
+**Limitations:**
+* Linear approximators assume that the relationship between features and value is linear. Most real-world environments are highly nonlinear, making linear models insufficient.
 
 ---
 
 ## 3. Nonlinear Function Approximation
 
-Modern reinforcement learning replaces linear models with neural networks.
+Modern reinforcement learning replaces linear approximators with deep neural networks.
 
-Instead of
+Instead of $Q(s,a) = \theta^T \phi(s,a)$, we learn:
 
-Q(s,a)=\theta^T\phi(s)
+$$Q(s,a;\theta) = f_\theta(s,a)$$
 
-we learn
+where $f_\theta$ is a deep neural network.
 
-Q(s,a;\theta)=f_\theta(s,a)
+Rather than relying on handcrafted features, the neural network automatically learns useful representations directly from raw observations such as images or sensor data. This allows reinforcement learning algorithms to solve much more complex problems than classical methods.
 
-where
+**Advantages:**
+* Learns complex nonlinear relationships.
+* Handles very high-dimensional state spaces.
+* Eliminates manual feature engineering.
 
-fθ
-
-is a deep neural network.
-
-The network automatically learns useful feature representations directly from raw observations such as images.
-
-Advantages
-
-- Learns complex nonlinear relationships
-- Handles extremely high-dimensional state spaces
-- Eliminates manual feature engineering
-
-Disadvantages
-
-- Harder to optimize
-- Training can become unstable
-- Requires significantly more data
+**Limitations:**
+* Training neural networks introduces instability because the learning targets themselves keep changing.
 
 ---
 
 ## 4. Deep Q-Networks (DQN)
 
-Deep Q-Networks combine Q-learning with deep neural networks.
+Deep Q-Networks (DQN) combine the Bellman equation from Q-learning with the representational power of deep neural networks. Instead of maintaining a Q-table, a neural network predicts the Q-values corresponding to each action.
 
-Instead of maintaining a Q-table, the network predicts Q-values for each possible action.
+For a given state, $Q(s,a;\theta)$ is the predicted value produced by the neural network. The desired target value $y$ is obtained using the Bellman optimality equation:
 
-For a given state s,
+$$y = r + \gamma \max_{a'} Q(s', a'; \theta^-)$$
 
-Q(s,a;\theta)
+where:
+* **$r$** is the immediate reward.
+* **$\gamma$** is the discount factor.
+* **$\theta^-$** denotes the parameters of the target network.
 
-is the predicted value produced by the neural network.
+The network is trained by minimizing the mean squared error between the predicted Q-value and the target. The DQN loss function is therefore:
 
-The target used for training is
+$$L(\theta) = \mathbb{E}_{(s,a,r,s') \sim U(D)} \left[ \left(y - Q(s,a;\theta)\right)^2 \right]$$
 
-y=r+\gamma\max_{a'}Q(s',a';\theta^-)
+or equivalently:
 
-where
+$$L(\theta) = \mathbb{E}_{(s,a,r,s') \sim U(D)} \left[ \left( r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s,a; \theta) \right)^2 \right]$$
 
-- r is the immediate reward
-- γ is the discount factor
-- θ⁻ represents the parameters of the target network
-
-The DQN loss function is
-
-L(\theta)=\mathbb{E}\left[\left(y-Q(s,a;\theta)\right)^2\right]
-
-or equivalently,
-
-L(\theta)=\mathbb{E}\left[\left(r+\gamma\max_{a'}Q(s',a';\theta^-)-Q(s,a;\theta)\right)^2\right]
-
-The network parameters are updated using gradient descent to minimize this loss.
+The parameters $\theta$ are updated using gradient descent to minimize this loss.
 
 ---
 
-## 5. Why Standard Q-learning Becomes Unstable
+## 4.5 From Bellman Equation to the DQN Loss Function
 
-When neural networks are used instead of tables, two major problems arise.
+The foundation of Q-learning is the Bellman Optimality Equation, which states that the optimal value of a state-action pair is the expected immediate reward plus the discounted maximum expected value of the next state:
 
-### Correlated Data
+$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \mid S_t=s, A_t=a \right]$$
 
-Consecutive experiences generated by the agent are highly correlated.
+In classical Q-learning, we use this recursive relationship to update our Q-values iteratively. The update rule pushes our current estimate $Q(s,a)$ towards the **Temporal Difference (TD) target**:
 
-Gradient descent assumes that training samples are approximately independent.
+$$\text{Target} = R_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a')$$
 
-Training directly on sequential experiences causes unstable updates and poor convergence.
+When transitioning to Deep Q-Networks, we replace the tabular Q-values with a neural network $Q(s,a; \theta)$. Instead of iterative assignment, we treat the TD target as the "ground truth" (albeit a moving one) for our network to predict.
+
+Using the target network parameters $\theta^-$ to stabilize this ground truth, we define our specific scalar target for a sampled transition $(s, a, r, s')$ as:
+
+$$y = r + \gamma \max_{a'} Q(s', a'; \theta^-)$$
+
+To train the main network (with parameters $\theta$), we frame this as a standard supervised learning regression problem. We want to minimize the difference between our current prediction and the TD target. We use the Mean Squared Error (MSE) loss function over a mini-batch of transitions sampled from the replay buffer $D$:
+
+$$L(\theta) = \mathbb{E}_{(s,a,r,s') \sim U(D)} \left[ \left( r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s,a; \theta) \right)^2 \right]$$
+
+Taking the gradient of this loss function with respect to the weights $\theta$ allows us to use stochastic gradient descent (SGD) to optimize the network, explicitly tying the theoretical Bellman equation to the backpropagation process.
+
+---
+
+## 5. Why Does Naive DQN Become Unstable?
+
+Replacing a Q-table with a neural network introduces two major problems.
+
+### Correlated Samples
+Traditional gradient descent assumes that training examples are approximately independent. However, an RL agent collects experiences sequentially ($State_1 \rightarrow State_2 \rightarrow State_3 \rightarrow \dots$). 
+
+These observations are highly correlated. Training directly on such correlated samples causes unstable parameter updates and poor convergence.
 
 ### Moving Targets
-
-The target itself depends on the network being updated.
-
-As the network changes,
-
-Q(s,a;\theta)
-
-also changes, causing the optimization target to continuously move.
-
-This often leads to oscillations or divergence.
+The target value is computed using the same network that is being updated. As the parameters change, $Q(s,a;\theta)$ also changes. Consequently, the target continuously shifts during optimization. This creates a situation where the network is attempting to chase a moving target, often causing oscillations or divergence.
 
 ---
 
 ## 6. Experience Replay
 
-To reduce correlations between samples, DQN introduces an experience replay buffer.
+To overcome correlated data, DQN stores each interaction in a replay buffer. Each experience is stored as a transition tuple:
 
-Each interaction with the environment is stored as
+$$(s, a, r, s')$$
 
-(s,a,r,s')
+Instead of training on consecutive transitions, the algorithm randomly samples mini-batches from this replay memory. Random sampling decorrelates the training data and allows each experience to be reused multiple times.
 
-During training, random mini-batches are sampled from this buffer instead of using consecutive experiences.
-
-Benefits
-
-- Breaks correlations between samples
-- Improves data efficiency by reusing experiences
-- Produces more stable gradient updates
+**Benefits:**
+* Breaks correlations between samples.
+* Improves sample efficiency.
+* Produces smoother gradient updates.
+* Reduces variance.
 
 ---
 
 ## 7. Target Networks
 
-A second neural network, called the target network, is maintained.
+DQN introduces a second neural network called the target network. There are now two networks:
 
-The online network has parameters
+### Online Network
+* **Parameters:** $\theta$
+* This network is updated after every gradient step.
 
-θ
+### Target Network
+* **Parameters:** $\theta^-$
+* This network remains fixed for many iterations and is periodically updated by copying the weights of the online network.
 
-while the target network has parameters
+The target therefore becomes:
 
-θ⁻
+$$y = r + \gamma \max_{a'} Q(s', a'; \theta^-)$$
 
-Instead of updating both simultaneously, the target network is copied from the online network only after a fixed number of training steps.
+Since $\theta^-$ changes much more slowly than $\theta$, the optimization target becomes nearly stationary.
 
-Thus,
-
-Target:
-
-y=r+\gamma\max_{a'}Q(s',a';\theta^-)
-
-Since θ⁻ changes slowly, the optimization target becomes much more stable.
-
-Benefits
-
-- Prevents chasing a moving target
-- Reduces oscillations
-- Improves convergence
+**Benefits:**
+* Stabilizes training.
+* Prevents oscillations.
+* Improves convergence.
 
 ---
 
-## 8. Why Replay Buffer and Target Networks Work Together
+## 8. Why Replay Buffers and Target Networks Work Together
 
-Experience replay solves the problem of correlated samples.
+Experience replay addresses one source of instability by ensuring that training data are approximately independent and identically distributed (i.i.d.). Target networks address another source by preventing the Bellman target from changing too rapidly.
 
-Target networks solve the problem of moving targets.
-
-Together, these two innovations transformed Q-learning from an unstable algorithm into one capable of learning directly from high-dimensional visual input.
-
-These two ideas were among the key reasons why DeepMind's 2015 DQN successfully achieved human-level performance on many Atari games.
+Together, these two ideas transformed Q-learning from an unstable algorithm into a practical deep reinforcement learning algorithm capable of learning directly from raw visual input. These innovations were the key contributions of the original DeepMind DQN (Nature, 2015) paper.
 
 ---
 
 ## Conclusion
 
-Function approximation enables reinforcement learning to scale from small tabular problems to realistic environments with enormous state spaces. While linear approximators are mathematically simple, modern reinforcement learning primarily relies on nonlinear function approximators such as deep neural networks.
+Function approximation enables reinforcement learning to scale from simple tabular problems to complex environments with millions of possible states. Linear approximators provide a mathematically simple solution but struggle to model complex relationships. Deep neural networks overcome this limitation by learning nonlinear value functions directly from data.
 
-Deep Q-Networks extend classical Q-learning by replacing the Q-table with a neural network. The use of experience replay and target networks addresses the instability introduced by neural networks, making DQN one of the foundational algorithms in deep reinforcement learning.
+Deep Q-Networks combine classical Q-learning with deep learning, replacing the Q-table with a neural network. The addition of experience replay and target networks addresses the instability introduced by nonlinear function approximation, making DQN one of the foundational algorithms in modern deep reinforcement learning.
