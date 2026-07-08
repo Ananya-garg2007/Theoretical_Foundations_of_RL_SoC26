@@ -95,7 +95,18 @@ The parameters $\theta$ are updated using gradient descent to minimize this loss
 
 The foundation of Q-learning is the Bellman Optimality Equation, which states that the optimal value of a state-action pair is the expected immediate reward plus the discounted maximum expected value of the next state:
 
-$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \mid S_t=s, A_t=a \right]$$
+$$
+Q^*(s,a)
+=
+\mathbb{E}\left[
+R_{t+1}
++
+\gamma
+\max_{a'} Q^*(S_{t+1},a')
+\mid
+S_t=s,\; A_t=a
+\right]
+$$
 
 In classical Q-learning, we use this recursive relationship to update our Q-values iteratively. The update rule pushes our current estimate $Q(s,a)$ towards the **Temporal Difference (TD) target**:
 
