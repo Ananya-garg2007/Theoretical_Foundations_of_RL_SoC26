@@ -227,3 +227,31 @@ By exploring the CartPole environment, I understood:
 - How rewards are generated.
 - Why continuous state spaces require function approximation or state discretization.
 - How the agent and environment interact during every episode.
+
+## State Discretization
+
+CartPole observations are continuous, whereas tabular Q-learning requires a finite number of discrete states.
+
+To bridge this gap, each state variable is divided into a fixed number of bins. Before discretization, the velocity components are clipped to reasonable ranges because their theoretical limits are infinite.
+
+The discretization process consists of three steps:
+
+1. Clip each state variable to predefined limits.
+2. Normalize the values between 0 and 1.
+3. Convert the normalized values into integer bin indices.
+
+
+
+For example,
+
+Continuous State
+
+[-0.01, -0.02, 0.03, 0.01]
+
+↓
+
+Discrete State
+
+(4, 4, 5, 4)
+
+The resulting tuple can now be used as an index in a Q-table.
