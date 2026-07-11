@@ -1,15 +1,23 @@
-"""
-Replay Buffer
+from collections import deque
+import random
 
-Stores
 
-(state,
- action,
- reward,
- next_state,
- done)
+class ReplayBuffer:
 
-Allows random sampling.
+    def __init__(self, capacity):
 
-Used by DQN.
-"""
+        self.memory = deque(maxlen=capacity)
+
+    def push(self, state, action, reward, next_state, done):
+
+        self.memory.append(
+            (state, action, reward, next_state, done)
+        )
+
+    def sample(self, batch_size):
+
+        return random.sample(self.memory, batch_size)
+
+    def __len__(self):
+
+        return len(self.memory)
