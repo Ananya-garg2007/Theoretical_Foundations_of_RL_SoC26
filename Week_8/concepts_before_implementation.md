@@ -241,13 +241,13 @@ Best Future Q-value = 8
 
 Then
 
+## Target
+
 $$
-Target
-=
-1+0.9(8)
-=
-8.2
+1 + 0.9(8)
 $$
+
+= **8.2**
 
 The Bellman Target estimates
 
@@ -274,7 +274,9 @@ Target = 8.2
 Learning Rate = 0.1
 ```
 
-Q-Learning updates the table using
+## \(Q_{\text{new}}\)
+
+The Q-value is updated using the Q-learning update rule:
 
 $$
 Q_{\text{new}}
@@ -283,7 +285,9 @@ Q_{\text{old}}
 +
 \alpha
 \left(
-Target-Q_{\text{old}}
+\text{Target}
+-
+Q_{\text{old}}
 \right)
 $$
 
@@ -292,14 +296,11 @@ Substituting the values,
 $$
 Q_{\text{new}}
 =
-5
-+
-0.1(8.2-5)
+5 + 0.1(8.2-5)
 $$
 
 $$
-=
-5.32
+= 5.32
 $$
 
 Notice that we **do not replace** the old value.
@@ -338,12 +339,15 @@ it simply selects the action with the highest Q-value.
 
 Mathematically,
 
+## \(\pi^*(s)\)
+
+The optimal policy chooses the action with the highest Q-value:
+
 $$
 \pi^*(s)
 =
-\arg\max_aQ(s,a)
+\arg\max_a Q(s,a)
 $$
-
 This means
 
 > **Among all possible actions in the current state, choose the action with the highest Q-value.**
