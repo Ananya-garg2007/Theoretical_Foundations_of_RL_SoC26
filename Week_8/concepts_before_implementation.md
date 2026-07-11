@@ -274,7 +274,6 @@ Target = 8.2
 Learning Rate = 0.1
 ```
 
-## \(Q_{\text{new}}\)
 
 The Q-value is updated using the Q-learning update rule:
 
