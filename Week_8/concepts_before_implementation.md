@@ -278,7 +278,7 @@ Learning Rate = 0.1
 
 The Q-value is updated using the Q-learning update rule:
 
-$$
+```math
 Q_{\text{new}}
 =
 Q_{\text{old}}
@@ -289,10 +289,6 @@ Q_{\text{old}}
 -
 Q_{\text{old}}
 \right)
-$$
-
-Substituting the values,
-
 
 $$
 Q_{\text{new}}
@@ -301,6 +297,7 @@ Q_{\text{new}}
 =
 5.32
 $$
+```
 
 Notice that we **do not replace** the old value.
 
