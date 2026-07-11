@@ -293,14 +293,13 @@ $$
 
 Substituting the values,
 
+
 $$
 Q_{\text{new}}
 =
-5 + 0.1(8.2-5)
-$$
-
-$$
-= 5.32
+5+0.1(8.2-5)
+=
+5.32
 $$
 
 Notice that we **do not replace** the old value.
