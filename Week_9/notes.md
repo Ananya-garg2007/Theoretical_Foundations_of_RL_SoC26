@@ -124,11 +124,7 @@ One of the biggest insights I gained during this project was that
 
 The Bellman Target is still
 
-$$
-Target
-=
-R+\gamma\max_{a'}Q(s',a')
-$$
+$$ Target = R+\gamma\max_{a'}Q(s',a') $$
 
 The only difference is that
 
