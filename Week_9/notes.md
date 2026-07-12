@@ -144,10 +144,7 @@ we calculate the error between
 
 using the Mean Squared Error loss.
 
-$$
-Loss
-=
-(Target-Prediction)^2
+$$ Loss = (Target-Prediction)^2
 $$
 
 The optimizer then performs **Backpropagation** to update the neural network weights.
