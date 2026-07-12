@@ -241,13 +241,13 @@ Best Future Q-value = 8
 
 Then
 
-## Target
-
 $$
-1 + 0.9(8)
+Target
+=
+1+0.9(8)
+=
+8.2
 $$
-
-= **8.2**
 
 The Bellman Target estimates
 
